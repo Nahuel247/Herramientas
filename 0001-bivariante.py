@@ -28,7 +28,7 @@ def bivariante(var_exp, var_resp, n_tramos):
     if(var_exp.dtypes!="object"):
         # Tramamos la variable explicativa en n_tramos
         bins = list(sorted(set(np.quantile(var_exp.copy(), np.arange(0,1+(1/n_tramos),1/n_tramos),overwrite_input=True))))
-        labels = [f'{int((i))}-{int((j))}' for i, j in zip(bins[:-1], bins[1:])] # creamos etiquetas
+        labels = [f'{round(i,3)}-{round(j,3)}' for i, j in zip(bins[:-1], bins[1:])] # creamos etiquetas
         categorias = pd.cut(var_exp, bins=bins, labels=labels, include_lowest=True, right=True)
         df=pd.DataFrame({'var_exp':var_exp,'categorias':categorias,'var_resp':var_resp})
         # agrupamos para conocer la tasa de incumplimiento según tramo
