@@ -7,7 +7,6 @@
 # Funcionalidad:
 # Herramienta para enriquecer la data para entrenar un modelo con YoloV5
 
-
 ################################################
 # IMPORTAMOS LAS LIBRERÍAS QUE VAMOS A UTILIZAR
 ################################################
