@@ -66,7 +66,7 @@ def eficiencia(var_exp, marca_malo, n_tramos):
     fig.update_layout(barmode='stack')
 
     fig.add_trace(trace3)
-    fig['layout'].update(height = 600, width = 800, title = "Tasa de incumplimiento según " + var_exp.name,
+    fig['layout'].update(height = 600, width = 800, title = "Incumplimientos según tramos para la variable " + var_exp.name,
                          xaxis=dict(tickangle=-45, title =var_exp.name),
                          yaxis=dict(title ="Número de registros (N)"),
                          yaxis2=dict(title='Tasa de incumplimiento acumulada'),
