@@ -6,7 +6,7 @@ Cada función tiene su propia base de datos para implementar cada herramienta.
 
 
 ##Visualización obtenido con la herramienta 0001-bivariante
-[![EDAD.jpg](https://i.postimg.cc/6QcJ84H1/EDAD.jpg)](https://postimg.cc/hJX3wvR9)
+[![EDAD.jpg](https://i.postimg.cc/QtK20Y8v/EDAD.jpg)](https://postimg.cc/hzgZGr70)
 
 ##Visualización obtenida con la herramienta 0003-eficiencia
-[![PROBABILIDAD.jpg](https://i.postimg.cc/DZzVLfHf/PROBABILIDAD.jpg)](https://postimg.cc/mcK6G4TK)
+[![PROBABILIDAD.jpg](https://i.postimg.cc/prNg7Qyr/PROBABILIDAD.jpg)](https://postimg.cc/qhLb63sH)
