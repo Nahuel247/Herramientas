@@ -33,7 +33,7 @@ import shutil
 #######################################
 
 path_image= "C:/Users/.../images/*"
-path_labels='.../labels/*'
+path_labels='C:/Users/.../labels/*'
 
 path_image_val="C:/Users/.../images/val/"
 path_image_train="C:/Users/.../images/train/"

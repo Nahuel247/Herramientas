@@ -45,11 +45,11 @@ def eficiencia(var_exp, marca_malo, n_tramos):
     #graficamos
     trace1=go.Bar(
         x=df_group['probabilidad_incumplimiento'],
-        y=df_group['incumplen'], name='incumplen',marker=dict(color='rgb(227, 57, 20)'))
+        y=df_group['incumplen'], name='incumplen',marker=dict(color='rgb(178,34,34)'))
 
     trace2=go.Bar(
         x=df_group['probabilidad_incumplimiento'],
-        y=df_group['cumplen'], name='cumplen',marker=dict(color='rgb(31, 52, 204)'))
+        y=df_group['cumplen'], name='cumplen',marker=dict(color='rgb(70,130,180)'))
 
     trace3= go.Scatter(
         x=df_group['probabilidad_incumplimiento'],
