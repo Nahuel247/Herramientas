@@ -21,26 +21,25 @@ from numpy.random import rand
 # CONSTRUIMOS LA HERRAMIENTA
 #############################
 
+# Definimos una función para procesar una variable categórica
 def descriptivo_texto(data,names_column):
     frec = np.unique(data[[names_column]], return_counts=True)
     df = pd.DataFrame(frec).T.copy()
     observaciones=np.nan
-    df[observaciones]=observaciones
+    df[observaciones]=np.nan
     df.columns = ["categorías", "frecuencia","observaciones"]
     return df
 
-descriptivo_texto(data, "SEXO")
-
-
+# Definimos una función para procesar una variable númericas
 def descriptivo_num (data, names_column):
     array=data[[names_column]]
-    n_zeros = np.sum([array==0])
-    n_negativos=np.sum([array<0])
-    n_missing=array[np.isnan(array)].sum()[0]
+    n_zeros = np.sum([array==0]) # N° de ceros
+    n_negativos=np.sum([array<0]) # N° de valores negativos
+    n_missing=array[np.isnan(array)].sum()[0] # N° de valores missing
     min= array[~np.isnan(array)].min()[0]
     max= array[~np.isnan(array)].max()[0]
     mean= array[~np.isnan(array)].mean()[0]
-    p5=np.percentile(array[~np.isnan(array)], 5)
+    p5=np.percentile(array[~np.isnan(array)], 5) # Valor del percentil al 5%
     p10 = np.percentile(array[~np.isnan(array)], 10)
     p25 = np.percentile(array[~np.isnan(array)], 25)
     p50 = np.percentile(array[~np.isnan(array)], 50)
@@ -54,7 +53,7 @@ def descriptivo_num (data, names_column):
     df.columns=[names_column]
     return df
 
-
+# construimos una función para gestionar una base de datos con registros categoricos o númericos
 def descriptivo(data):
     with ExcelWriter("Descriptivo.xlsx") as writer:
         data_num = data.loc[:, (data.dtypes != "object")].copy()
@@ -64,11 +63,10 @@ def descriptivo(data):
             pred_list = []
             list_var = data_num.columns
             for names_column in list_var:
-                if (data[[names_column]].dtypes != "object").all():
-                    prediction = pd.DataFrame(descriptivo_num(data, names_column))
-                    pred_list.append(prediction)
+                prediction = pd.DataFrame(descriptivo_num(data, names_column))
+                pred_list.append(prediction)
             final_prediction = pd.concat(pred_list, axis=1).T
-            final_prediction.to_excel(writer, names_column)
+            final_prediction.to_excel(writer, "var_numericas")
             n += 1
 
         if (data_text.shape[1] >= 1):
@@ -76,7 +74,6 @@ def descriptivo(data):
             for names_column in list_dfs:
                 n = n + 1
                 df = descriptivo_texto(data_text, names_column)
-                df.columns = ["categorías", "frecuencia","observaciones"]
                 df.to_excel(writer, names_column, index=False)
     print("Se ha creado un descriptivo de los datos")
 
@@ -85,6 +82,7 @@ def descriptivo(data):
 # IMPLEMENTAMOS LA HERRAMIENTA
 ###############################
 
+# creamos un set de datos para hacer pruebas
 EDAD=np.round(rand(1000)*80) +18
 TIEMPO_EMPRESA=np.round(rand(1000)*80)-4
 SEXO=np.random.choice(a=["M","H"],size=1000)
@@ -92,11 +90,10 @@ SEXO[[1,100,340]]="F"
 CATEGORIA=np.random.choice(a=["A","B"],size=1000)
 
 data=pd.DataFrame({'EDAD':EDAD,'TIEMPO_EMPRESA':TIEMPO_EMPRESA,'SEXO':SEXO,'CATEGORÍA':CATEGORIA})
-
 data.head()
 
-
 descriptivo(data)
+
 
 ####################
 # REFERENCIAS
