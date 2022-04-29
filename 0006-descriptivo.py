@@ -56,25 +56,23 @@ def descriptivo_num (data, names_column):
 # construimos una función para gestionar una base de datos con registros categoricos o númericos
 def descriptivo(data):
     with ExcelWriter("Descriptivo.xlsx") as writer:
-        data_num = data.loc[:, (data.dtypes != "object")].copy()
-        data_text = data.loc[:, (data.dtypes == "object")].copy()
+        names_column_num = data.loc[:, (data.dtypes != "object")].columns.copy()
+        names_column_text = data.loc[:, (data.dtypes == "object")].columns.copy()
         n = 0
-        if (data_num.shape[1] >= 1):
-            pred_list = []
-            list_var = data_num.columns
-            for names_column in list_var:
-                prediction = pd.DataFrame(descriptivo_num(data, names_column))
-                pred_list.append(prediction)
-            final_prediction = pd.concat(pred_list, axis=1).T
-            final_prediction.to_excel(writer, "var_numericas")
+        if (names_column_num.shape[0] >= 1):
+            desc_num_list = []
+            for names_column in names_column_num:
+                desc_num = descriptivo_num(data, names_column)
+                desc_num_list.append(desc_num)
+            final_desc_num = pd.concat(desc_num_list, axis=1).T
+            final_desc_num.to_excel(writer, "var_numericas")
             n += 1
 
-        if (data_text.shape[1] >= 1):
-            list_dfs = data_text.columns
-            for names_column in list_dfs:
+        if (names_column_text.shape[0] >= 1):
+            for names_column in names_column_text:
                 n = n + 1
-                df = descriptivo_texto(data_text, names_column)
-                df.to_excel(writer, names_column, index=False)
+                desc_txt = descriptivo_texto(data, names_column)
+                desc_txt.to_excel(writer, names_column, index=False)
     print("Se ha creado un descriptivo de los datos")
 
 
@@ -93,7 +91,6 @@ data=pd.DataFrame({'EDAD':EDAD,'TIEMPO_EMPRESA':TIEMPO_EMPRESA,'SEXO':SEXO,'CATE
 data.head()
 
 descriptivo(data)
-
 
 ####################
 # REFERENCIAS
